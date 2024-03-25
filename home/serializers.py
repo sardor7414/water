@@ -75,7 +75,7 @@ class OrderByDailyOrderSerializer(serializers.ModelSerializer):
 
     def calculate_debt(self, instance):
         customer_id = instance.daily_order.customer.id
-        debt_url = f"http://127.0.0.1:8000/calculate-debt/{customer_id}/"
+        debt_url = f"https://sayqal.pythonanywhere.com/calculate-debt/{customer_id}/"
         try:
             response = requests.get(debt_url)
             if response.status_code == status.HTTP_200_OK:
