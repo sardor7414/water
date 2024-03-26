@@ -331,3 +331,20 @@ class DashboardAPI(APIView):
         }
 
         return Response(data)
+
+
+
+class ReportDebtCustomerAPI(APIView):
+    def get(self, request):
+        debt_customers = OrderByDailyOrder.objects.filter(debt_customer__gt=0)
+        serializer = OrderByDailyOrderSerializer(debt_customers, many=True)
+        # Return serialized data
+        return Response(serializer.data)
+
+
+class OldCustomerReportAPI(APIView):
+
+    def get(self, request):
+        old_customers = OldCustomer.objects.all()
+        serializer = OldCustomerSerializer(old_customers, many=True)
+        return Response(serializer.data)

@@ -1,10 +1,13 @@
 from django.urls import path
 from .views import (CategoryCustomerAPI, CustomerAPI, CustomerDataAPI, OrderAPI, DailyOrderAPI, OrderByDailyOrderList,
-                    GetDailyOrderDataAPI, CalculateDebtAPI, OrderByDailyOrderDetail, DashboardAPI)
+                    GetDailyOrderDataAPI, CalculateDebtAPI, OrderByDailyOrderDetail, DashboardAPI, ReportDebtCustomerAPI,
+                    OldCustomerReportAPI)
 
 
 urlpatterns = [
     path('dashboard/', DashboardAPI.as_view()),
+    path('report/', ReportDebtCustomerAPI.as_view()),
+    path('report-old-customer/', OldCustomerReportAPI.as_view()),
     path('add-category/', CategoryCustomerAPI.as_view()),
     path('update-category/<int:pk>/', CategoryCustomerAPI.as_view()),
     path('add-customer/', CustomerAPI.as_view()),
