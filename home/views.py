@@ -348,3 +348,15 @@ class OldCustomerReportAPI(APIView):
         old_customers = OldCustomer.objects.all()
         serializer = OldCustomerSerializer(old_customers, many=True)
         return Response(serializer.data)
+
+
+class HistoryCustomerAPI(APIView):
+    permission_classes = (IsAuthenticated, )
+
+    def get_queryset(self):
+        return OrderByDailyOrder.objects.all()
+
+    def get(self, request, pk):
+        orders = OrderByDailyOrder.objects.filter(daily_order__customer_id=pk)
+        serializer = OrderByDailyOrderSerializer(orders, many=True)
+        return Response(serializer.data)
