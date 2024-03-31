@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (CategoryCustomerAPI, CustomerAPI, CustomerDataAPI, OrderAPI, DailyOrderAPI, OrderByDailyOrderList,
                     GetDailyOrderDataAPI, CalculateDebtAPI, OrderByDailyOrderDetail, DashboardAPI, ReportDebtCustomerAPI,
-                    OldCustomerReportAPI, HistoryCustomerAPI)
+                    OldCustomerReportAPI, HistoryCustomerAPI, CreateOrderByDailyOrder)
 
 
 urlpatterns = [
@@ -17,6 +17,7 @@ urlpatterns = [
     path('update-order/<int:pk>/', OrderAPI.as_view()),
     path('daily-order/', DailyOrderAPI.as_view()),
     path('update-daily-order/<int:pk>/', DailyOrderAPI.as_view()),
+    path('create-order-by-daily-order/', CreateOrderByDailyOrder.as_view()),
     path('get-daily-order-data/<int:pk>/', GetDailyOrderDataAPI.as_view()),
     path('get-order-by-daily-order/<int:order_id>/', OrderByDailyOrderList.as_view()),
     path('update-order-by-daily-order/<int:pk>/', OrderByDailyOrderDetail.as_view()),

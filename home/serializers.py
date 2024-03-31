@@ -94,3 +94,8 @@ class OrderByDailyOrderSerializer(serializers.ModelSerializer):
         res['story_customer'] = debt_data
         return res
 
+
+class CreateOrderByDailyOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderByDailyOrder
+        fields = '__all__'

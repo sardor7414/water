@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from user.permissions import IsSuperUser
 from .serializers import (CategoryCustomerSerializer, CustomerSerializer, CustomerDataSerializer, OrderSerializer,
-                          DailyOrderSerializer, OldCustomerSerializer, OrderByDailyOrderSerializer)
+                          DailyOrderSerializer, OldCustomerSerializer, OrderByDailyOrderSerializer, CreateOrderByDailyOrderSerializer)
 from .models import CategoryCustomer, Customer,LocalArea, DeliveryDriver, DailyOrder, Order, OrderByDailyOrder, OldCustomer, Product
 from rest_framework.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND, HTTP_500_INTERNAL_SERVER_ERROR
 
@@ -217,6 +217,18 @@ class OrderByDailyOrderList(APIView):
             return Response({"message": "Order not found"}, status=HTTP_404_NOT_FOUND)
 
 
+class CreateOrderByDailyOrder(APIView):
+    permission_classes = (IsAuthenticated, )
+
+    def post(self, request):
+        data = request.data
+        serializer = CreateOrderByDailyOrderSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({
+            "message": "Buyurtma muvaffaqiyatli yaratildi!",
+            "data": serializer.data
+        })
 
 
 class OrderByDailyOrderDetail(APIView):
